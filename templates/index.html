@@ -1,1 +1,111 @@
-<h1>Placeholder Index</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Furniture Prompt + SEO Generator</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <h1>Furniture Prompt + SEO Tool</h1>
+
+  <form action="/generate" method="post" enctype="multipart/form-data">
+    <label>Product Name:</label>
+    <input type="text" name="product_name" required>
+
+    <label>Category:</label>
+    <select name="category" required>
+      <option>Banquet Chairs</option>
+      <option>Café Chairs</option>
+      <option>Dining Chairs</option>
+      <option>Hotel Chairs</option>
+      <option>Bar Stools</option>
+      <option>Arm Chairs</option>
+      <option>Outdoor Chairs</option>
+      <option>Table Tops</option>
+      <option>Table Bases</option>
+      <option>Lounges</option>
+      <option>Ottomans</option>
+      <option>Banquette Seating</option>
+    </select>
+
+    <label>Upload Base Image:</label>
+    <input type="file" name="base_image" accept="image/*" required>
+
+    <label>Fabric Swatch (optional):</label>
+    <input type="file" name="fabric_image" accept="image/*">
+
+    <label>Frame Finish (optional):</label>
+    <input type="file" name="frame_image" accept="image/*">
+
+    <label>Upholstery Type:</label>
+    <select name="upholstery_type">
+      <option>Fabric</option><option>Vinyl</option><option>Leather</option><option>Bouclé</option><option>Velvet</option>
+    </select>
+
+    <label>Upholstery Style:</label>
+    <select name="upholstery_style">
+      <option>Button Tufting</option><option>Diamond Tufting</option><option>Channel Stitching</option>
+      <option>Blind Stitching</option><option>Panel Stitching</option><option>Slip Cover / Skirt</option>
+      <option>Piping / Welt Cord</option>
+    </select>
+
+    <label>With Arms:</label>
+    <select name="arms">
+      <option>Yes</option><option>No</option>
+    </select>
+
+    <label>Backrest Type:</label>
+    <select name="backrest">
+      <option>Closed Back</option><option>Open Back</option><option>Cut-out Back</option><option>Upholstered Back</option>
+    </select>
+
+    <label>Leg / Frame Material:</label>
+    <select name="leg_material">
+      <option>Timber</option><option>Metal (Powder Coated)</option><option>Chrome</option><option>Brass</option><option>Plastic</option>
+    </select>
+
+    <label>Leg Finish:</label>
+    <input type="text" name="leg_finish" placeholder="e.g. Walnut, Matte Black, Natural Oak">
+
+    <label>Stackable:</label>
+    <select name="stackable">
+      <option>No</option><option>Yes</option>
+    </select>
+
+    <label>Feet Type:</label>
+    <select name="feet">
+      <option>Plastic Glides</option><option>Felt Glides</option><option>Castors</option>
+    </select>
+
+    <label>Seat Cushion:</label>
+    <select name="cushion">
+      <option>Fixed</option><option>Removable</option>
+    </select>
+
+    <label><input type="checkbox" name="fire_rated"> Fire Rated Foam</label><br>
+    <label><input type="checkbox" name="outdoor_suitable"> Outdoor Suitable</label><br>
+    <label><input type="checkbox" name="include_360"> Include 360° Prompt</label><br>
+
+    <hr>
+    <label for="description_text">Paste Chair Description (from ChatGPT):</label>
+    <textarea name="description_text" placeholder="e.g. This dining chair features a channel-tufted velvet backrest..."></textarea>
+
+    <label><input type="checkbox" name="generate_seo"> ✅ Generate SEO from description</label>
+
+    <button type="submit">Generate Prompt & SEO</button>
+  </form>
+
+  {% if output %}
+    <h2>Generated Prompt Output</h2>
+    <textarea readonly>{{ output }}</textarea>
+
+    <h3>Download Files</h3>
+    <ul>
+      <li><a href="/download/txt" target="_blank">📄 Download Prompt (.txt)</a></li>
+      <li><a href="/download/json" target="_blank">🧾 Download JSON (.json)</a></li>
+      <li><a href="/download/seo" target="_blank">🧠 Download SEO (.txt)</a></li>
+      <li><a href="/download/zip" target="_blank">🗜 Download All (.zip)</a></li>
+    </ul>
+  {% endif %}
+</body>
+</html>
