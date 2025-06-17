@@ -100,9 +100,16 @@ def generate():
             json.dump(seo, f, indent=2)
 
     zip_path = os.path.join(folder, f"{safe_name}_export.zip")
-    with zipfile.ZipFile(zip_path, "w") as zipf:
-        for file in os.listdir(folder):
-            zipf.write(os.path.join(folder, file), arcname=file)
+
+    # ✅ Safe ZIP creation with error handling
+    try:
+        with zipfile.ZipFile(zip_path, "w") as zipf:
+            for file in os.listdir(folder):
+                filepath = os.path.join(folder, file)
+                if os.path.isfile(filepath):
+                    zipf.write(filepath, arcname=file)
+    except Exception as e:
+        print(f"⚠️ ZIP Error: {e}")
 
     global LAST_FOLDER
     LAST_FOLDER = folder
