@@ -101,15 +101,18 @@ def generate():
 
     zip_path = os.path.join(folder, f"{safe_name}_export.zip")
 
-    # ✅ Safe ZIP creation with error handling
+    # ✅ ZIP creation with memory-safe logging
     try:
+        print("⚙️ Starting ZIP build")
         with zipfile.ZipFile(zip_path, "w") as zipf:
             for file in os.listdir(folder):
                 filepath = os.path.join(folder, file)
                 if os.path.isfile(filepath):
+                    print(f"Adding to zip: {file}")
                     zipf.write(filepath, arcname=file)
+        print("✅ ZIP created successfully")
     except Exception as e:
-        print(f"⚠️ ZIP Error: {e}")
+        print(f"❌ ZIP ERROR: {e}")
 
     global LAST_FOLDER
     LAST_FOLDER = folder
